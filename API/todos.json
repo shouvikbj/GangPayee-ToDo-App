@@ -1,0 +1,122 @@
+[
+  {
+    "id": "8ec76590-315d-4dab-8d7f-6b202289b90a",
+    "email": "piku@tiku.com",
+    "topic": "Test topic 1",
+    "todoString": "Test todoString 1",
+    "status": "done",
+    "timestamp": "26-06-2020, at 17:08"
+  },
+  {
+    "id": "2bc2b906-1dcb-4730-8e16-1eafe0ba6229",
+    "email": "gyani@guni.com",
+    "topic": "Test topic 2",
+    "todoString": "Test todoString 2",
+    "status": "done",
+    "timestamp": "26-06-2020, at 17:08"
+  },
+  {
+    "id": "d012d050-cd05-4e6f-8d63-7a8a1edd5526",
+    "email": "gyani@guni.com",
+    "topic": "Test topic 3",
+    "todoString": "Test todoString 3",
+    "status": "done",
+    "timestamp": "26-06-2020, at 17:08"
+  },
+  {
+    "id": "dd8e5654-335b-4fe6-a366-a1f766f5755b",
+    "email": "piku@tiku.com",
+    "topic": "Test topic 4",
+    "todoString": "Test todoString 4",
+    "status": "done",
+    "timestamp": "26-06-2020, at 17:08"
+  },
+  {
+    "id": "480b6705-ae00-476a-a8fc-0087a4a6c44a",
+    "email": "gyani@guni.com",
+    "topic": "Almost Done",
+    "todoString": "Almost done with my portion of the ToDo app",
+    "status": "done",
+    "timestamp": "26-06-2020, at 17:08"
+  },
+  {
+    "id": "c6d533e5-b564-4aee-b8b2-a4df790646b9",
+    "email": "gyani@guni.com",
+    "topic": "Nothing",
+    "todoString": "Nothing to do right now.",
+    "status": "done",
+    "timestamp": "26-06-2020, at 17:08"
+  },
+  {
+    "id": "4bbe7c87-39e2-4168-8a16-25ea2c5962b9",
+    "email": "gyani@guni.com",
+    "topic": "Almost Done",
+    "todoString": "I am done for today and my part for today is almost done. Some tweaks are still needed.",
+    "status": "done",
+    "timestamp": "26-06-2020, at 17:08"
+  },
+  {
+    "id": "79e80764-f4c0-4f1c-a4ac-94e7cfcad758",
+    "email": "gyani@guni.com",
+    "topic": "Search ToDo",
+    "todoString": "Testing the ToDo search service.",
+    "status": "done",
+    "timestamp": "26-06-2020, at 17:08"
+  },
+  {
+    "id": "25d3b4d4-e58c-4736-8acd-e6f74357af9b",
+    "email": "gyani@guni.com",
+    "topic": "Time Stamp",
+    "todoString": "Forgot to add \"timestamp\" earlier. Now the time stamp is added and working fine.",
+    "status": "done",
+    "timestamp": "26-06-2020, at 17:16"
+  },
+  {
+    "id": "693ce0dc-6ca5-4518-b4e4-f142231dc353",
+    "email": "gyani@guni.com",
+    "topic": "Timer Implementation",
+    "todoString": "Starting the Timer Implementation.",
+    "status": "done",
+    "timestamp": "26-06-2020, at 17:51"
+  },
+  {
+    "id": "5d701818-c37e-47b8-b0f8-e581e08d184e",
+    "email": "gyani@guni.com",
+    "topic": "Timer",
+    "todoString": "Add sound effect which will be played when the time is over.",
+    "status": "not done",
+    "timestamp": "26-06-2020, at 22:08"
+  },
+  {
+    "id": "e3719de6-d2da-4929-95f6-986e52ff2022",
+    "email": "piku@tiku.com",
+    "topic": "Login & Logout",
+    "todoString": "Login and Logout feature added. Account distinction also added.",
+    "status": "not done",
+    "timestamp": "27-06-2020, at 16:30"
+  },
+  {
+    "id": "019cc2b3-9b01-4833-a82f-a1e78c417b33",
+    "email": "piku2@tiku2.com",
+    "topic": "Piku2",
+    "todoString": "ToDo of piku2@tiku2.com",
+    "status": "done",
+    "timestamp": "27-06-2020, at 16:42"
+  },
+  {
+    "id": "0144ae78-7c07-40ee-88ee-267245e24cb6",
+    "email": "piku2@tiku2.com",
+    "topic": "tt",
+    "todoString": "tt",
+    "status": "done",
+    "timestamp": "27-06-2020, at 16:45"
+  },
+  {
+    "id": "16c363af-10e8-4587-a220-ce6f7128d577",
+    "email": "piku@tiku.com",
+    "topic": "All Done",
+    "todoString": "Everything is working fine.. Hopefully within today we will be able to host this ToDo App.",
+    "status": "not done",
+    "timestamp": "27-06-2020, at 16:55"
+  }
+]

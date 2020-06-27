@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo Home</title>
+    <!-- <script>
+      if (
+        location.hostname === "todopwa.pythonanywhere.com" &&
+        location.protocol !== "https:"
+      ) {
+        location.href = location.href.replace("http:", "https:");
+      }
+    </script> -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+      integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <link rel="manifest" href="/manifest.json" />
+    <style>
+      body {
+        background-color: black;
+        color: white;
+      }
+      #navBar {
+        position: fixed;
+        bottom: 0px;
+        width: 100%;
+      }
+      #addBox {
+        width: auto;
+        -moz-border-radius: 30px;
+        -webkit-border-radius: 30px;
+        border-radius: 30px;
+      }
+      #addBtn {
+        -moz-border-radius: 30px;
+        -webkit-border-radius: 30px;
+        border-radius: 30px;
+      }
+      #todo {
+        background-color: rgb(49, 42, 42);
+        -moz-border-radius: 10px;
+        -webkit-border-radius: 10px;
+        border-radius: 10px;
+      }
+      #icon {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        z-index: 99;
+        font-size: 300%;
+        color: #fff222;
+      }
+      #input {
+        -moz-border-radius: 30px;
+        -webkit-border-radius: 30px;
+        border-radius: 30px;
+      }
+      #livesearch {
+        width: 92%;
+        height: 50px;
+        border: none;
+        text-align: center;
+        box-shadow: 0px 0px 10px -5px rgb(255, 255, 255);
+        border-radius: 2px;
+        outline: none;
+        background-color: rgb(58, 52, 52);
+        color: white;
+      }
+    </style>
+    <!-- Timer Implementation -->
+    <!-- <script>
+      function convert(time) {
+        var hour = Math.floor(time / 60);
+        var minute = Math.floor(time % 60);
+        return `${hour} : ${minute}`;
+      }
+      var counter = 0;
+      var remainingTime = 0;
+      var time = $("#time");
+      function timer(endTime) {
+        const finalTime = endTime * 60;
+        var x = setInterval(function () {
+          remainingTime = finalTime - counter;
+          time.html(convert(remainingTime));
+          counter = counter + 1;
+        }, 1000);
+      }
+    </script> -->
+    <script>
+      $(document).ready(function () {
+        $("#timeContainer").hide();
+        $("#timerBtn1").click(function () {
+          $("#timeContainer").show();
+          // timer(15);
+          $("#timerOptions").hide();
+          $("#buttons1").hide();
+          $("#buttons2").hide();
+        });
+        $("#timerBtn2").click(function () {
+          $("#timeContainer").show();
+          // timer(30);
+          $("#timerOptions").hide();
+          $("#buttons1").hide();
+          $("#buttons2").hide();
+        });
+        $("#timerBtn3").click(function () {
+          $("#timeContainer").show();
+          // timer(45);
+          $("#timerOptions").hide();
+          $("#buttons1").hide();
+          $("#buttons2").hide();
+        });
+        $("#timerBtn4").click(function () {
+          $("#timeContainer").show();
+          // timer(50);
+          $("#timerOptions").hide();
+          $("#buttons1").hide();
+          $("#buttons2").hide();
+        });
+        $("#timerBtn5").click(function () {
+          $("#timeContainer").show();
+          // timer(15);
+          $("#timerOptions").hide();
+          $("#buttons1").hide();
+          $("#buttons2").hide();
+        });
+        $("#timerBtn6").click(function () {
+          $("#timeContainer").show();
+          // timer(30);
+          $("#timerOptions").hide();
+          $("#buttons1").hide();
+          $("#buttons2").hide();
+        });
+        $("#timerBtn7").click(function () {
+          $("#timeContainer").show();
+          // timer(45);
+          $("#timerOptions").hide();
+          $("#buttons1").hide();
+          $("#buttons2").hide();
+        });
+        $("#timerBtn8").click(function () {
+          $("#timeContainer").show();
+          // timer(50);
+          $("#timerOptions").hide();
+          $("#buttons1").hide();
+          $("#buttons2").hide();
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div class="text-center">
+      <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %} {% if
+        messages %} {% for category, message in messages %}
+        <div class="alert alert-{{ category }} alert-dismissible" role="alert">
+          <span>{{ message }}</span>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="alert"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        {% endfor %} {% endif %} {% endwith %}
+      </div>
+      <div class="container row pt-2">
+        <div class="col-6">
+          <div class="text-left">
+            <a href="/logout">
+              <button
+                style="
+                  -moz-border-radius: 30px;
+                  -webkit-border-radius: 30px;
+                  border-radius: 30px;
+                "
+                class="btn btn-danger"
+              >
+                logout
+              </button>
+            </a>
+          </div>
+        </div>
+        <div class="col-6 text-right">
+          <p class="text-right">
+            {{ todos[0]["email"] }}
+          </p>
+        </div>
+      </div>
+
+      <br />
+      <div class="container text-center">
+        <!-- <div class="text-right">
+          <a href="/logout">
+            <button class="btn btn-danger">Logout</button>
+          </a>
+        </div> -->
+        <a href="/">
+          <h3 style="color: aliceblue; font-weight: bold;">My TODOs</h3>
+        </a>
+      </div>
+      <br />
+      <div class="input-icons">
+        <input
+          type="text"
+          name="searchbox"
+          id="livesearch"
+          class="input-field"
+          placeholder="Search for ToDo"
+        />
+        <br /><br />
+      </div>
+      <div></div>
+      <br />
+      <!-- Main ToDo Contents start here -->
+      <div class="container">
+        <div class="row text-center">
+          <div class="col-lg-4 col-md-3"></div>
+          <div class="col-lg-4 col-md-6 text-center">
+            <div id="todolist" class="text-center">
+              {% for todo in todos %}
+              <div id="todo" class="container text-left">
+                <div class="container pt-3 pb-1">
+                  <p style="float: left; font-size: 90%;">
+                    {{ todo["timestamp"] }}
+                  </p>
+                  <i
+                    class="fas fa-clock"
+                    style="float: right; font-size: 130%;"
+                    data-toggle="modal"
+                    data-target="#exampleModalCenter2"
+                  ></i>
+                  <br /><br />
+                  {% if (todo["status"] == "done" ) %}
+                  <p style="float: right; color: #74b9ff;">
+                    ({{ todo["status"] }})
+                  </p>
+                  {% else %}
+                  <p style="float: right; color: orange;">
+                    ({{ todo["status"] }})
+                  </p>
+                  {% endif %}
+
+                  <h5 style="font-weight: bold; color: yellow;">
+                    {% if (todo["status"] == "done" ) %}
+                    <strike>{{ todo["topic"] }}</strike>
+                    {% else %} {{ todo["topic"] }} {% endif %}
+                  </h5>
+                  <!-- <p style="float: right;">{{ todo["status"] }}</p>
+                  <br /> -->
+                  <p>
+                    {% if (todo["status"] == "done" ) %}
+                    <strike>{{ todo["todoString"] }}</strike>
+                    {% else %} {{ todo["todoString"] }} {% endif %}
+                  </p>
+                </div>
+                <div id="done" class="text-right">
+                  <a href="/todo/{{ todo['id'] }}/changestatus">
+                    {% if (todo["status"] == "done" ) %}
+                    <i class="fas fa-check-double"></i>
+                    {% else %}
+                    <i style="color: orange;" class="fas fa-check-double"></i>
+                    {% endif %}
+                  </a>
+                </div>
+              </div>
+              <br />
+              <!-- Modal -->
+              <div
+                style="background-color: rgba(255, 255, 255, 0.692);"
+                class="modal fade"
+                id="exampleModalCenter2"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="exampleModalCenterTitle"
+                aria-hidden="true"
+                data-backdrop="static"
+              >
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div
+                      class="modal-header"
+                      style="background-color: rgb(39, 35, 35);"
+                    >
+                      <h4
+                        style="color: #fff222; font-weight: bold;"
+                        class="modal-title"
+                        id="exampleModalLongTitle"
+                      >
+                        Timer
+                      </h4>
+                      <!-- <button
+                        style="color: white;"
+                        type="button"
+                        class="close"
+                        data-dismiss="modal"
+                        aria-label="Close"
+                      >
+                        <span aria-hidden="true">&times;</span>
+                      </button> -->
+                    </div>
+                    <div
+                      class="modal-body"
+                      style="background-color: rgb(39, 35, 35);"
+                    >
+                      <span id="timerOptions">Select a Timer</span>
+                      <div id="buttons1" class="container row p-3">
+                        <div class="col-4">
+                          <button
+                            id="timerBtn1"
+                            onclick="timer(1)"
+                            class="btn btn-primary"
+                          >
+                            1 min
+                          </button>
+                        </div>
+                        <div class="col-4">
+                          <button
+                            id="timerBtn2"
+                            onclick="timer(5)"
+                            class="btn btn-primary"
+                          >
+                            5 min
+                          </button>
+                        </div>
+                        <div class="col-4">
+                          <button
+                            id="timerBtn3"
+                            onclick="timer(10)"
+                            class="btn btn-primary"
+                          >
+                            10 min
+                          </button>
+                        </div>
+                        <!-- <div class="col-4">
+                          <button
+                            id="timerBtn4"
+                            onclick="timer(10)"
+                            class="btn btn-primary"
+                          >
+                            10 min
+                          </button>
+                        </div> -->
+                      </div>
+                      <div id="buttons2" class="container row p-3">
+                        <div class="col-4">
+                          <button
+                            id="timerBtn5"
+                            onclick="timer(15)"
+                            class="btn btn-primary"
+                          >
+                            15 min
+                          </button>
+                        </div>
+                        <div class="col-4">
+                          <button
+                            id="timerBtn6"
+                            onclick="timer(30)"
+                            class="btn btn-primary"
+                          >
+                            30 min
+                          </button>
+                        </div>
+                        <!-- <div class="col-4">
+                          <button
+                            id="timerBtn7"
+                            onclick="timer(45)"
+                            class="btn btn-primary"
+                          >
+                            45 min
+                          </button>
+                        </div> -->
+                        <div class="col-4">
+                          <button
+                            id="timerBtn8"
+                            onclick="timer(60)"
+                            class="btn btn-primary"
+                          >
+                            60 min
+                          </button>
+                        </div>
+                      </div>
+                      <div id="timeContainer" class="container text-center">
+                        <h3 id="timeOver">Time Left</h3>
+                        <h3
+                          style="font-weight: bold; color: #74b9ff;"
+                          id="time"
+                        >
+                          mm : ss
+                        </h3>
+                      </div>
+                    </div>
+                    <div
+                      class="modal-footer"
+                      style="background-color: rgb(39, 35, 35);"
+                    >
+                      <a href="/"
+                        ><button id="cancel" class="btn btn-danger">
+                          Cancel
+                        </button></a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Modal End -->
+              {% endfor %}
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-3"></div>
+        </div>
+      </div>
+    </div>
+    <i
+      type="button"
+      data-toggle="modal"
+      data-target="#exampleModalCenter"
+      class="fas fa-plus-circle"
+      id="icon"
+    ></i>
+    <br /><br /><br />
+    <!-- Modal -->
+    <div
+      style="background-color: rgba(255, 255, 255, 0.692);"
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header" style="background-color: rgb(39, 35, 35);">
+            <h4
+              style="color: #fff222; font-weight: bold;"
+              class="modal-title"
+              id="exampleModalLongTitle"
+            >
+              Add ToDo
+            </h4>
+            <button
+              style="color: white;"
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form action="/" method="POST">
+            <div class="modal-body" style="background-color: rgb(39, 35, 35);">
+              <div class="form-group">
+                <label for="exampleInputEmail1">Topic</label>
+                <input
+                  name="topic"
+                  id="input"
+                  type="text"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="topic of this ToDo"
+                  required
+                />
+              </div>
+              <div class="form-group">
+                <label for="exampleInputPassword1">About</label>
+                <textarea
+                  name="todoString"
+                  id="input"
+                  style="height: 100px;"
+                  type="text"
+                  class="form-control"
+                  id="exampleInputPassword1"
+                  placeholder="more about this ToDo"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div
+              class="modal-footer"
+              style="background-color: rgb(39, 35, 35);"
+            >
+              <button type="reset" class="btn btn-danger">Reset</button>
+              <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Below is the bottom "nav bar" -->
+    <!-- <nav id="navBar" class="navbar navbar-dark bg-dark">
+      <div class="container">
+        <div style="float: left;">
+          <input
+            class="form-control mr-sm-2"
+            type="search"
+            placeholder="Write your ToDo"
+            aria-label="Search"
+            name="addBox"
+            id="addBox"
+          />
+        </div>
+        <div style="float: right;" align="right">
+          <button id="addBtn" class="btn btn-primary my-2 my-sm-0">
+            <i class="far fa-paper-plane"></i>
+          </button>
+        </div>
+      </div>
+    </nav> -->
+
+    <!-- Audio -->
+    <audio src="/sound/ding2.mp3"></audio>
+
+    <!-- Timer Implementation -->
+    <script>
+      var data = "";
+      // var ding = "/sound/ding.mp3";
+      const audio = document.querySelector("audio");
+      function convert(time) {
+        var Hour = "";
+        var Minute = "";
+        var hour = Math.floor(time / 60);
+        var minute = Math.floor(time % 60);
+        var hourLen = hour.toString().length;
+        var minuteLen = minute.toString().length;
+        if (hourLen < 2) {
+          Hour = "0" + hour.toString();
+        } else {
+          Hour = hour.toString();
+        }
+        if (minuteLen < 2) {
+          Minute = "0" + minute.toString();
+        } else {
+          Minute = minute.toString();
+        }
+        return `${Hour} : ${Minute}`;
+      }
+      var counter = 0;
+      var remainingTime = 0;
+      var time = $("#time");
+      function timer(endTime) {
+        const finalTime = endTime * 60;
+        var x = setInterval(function () {
+          remainingTime = finalTime - counter;
+          if (remainingTime <= 0) {
+            data = "<div class='progress'>";
+            data += `<div class="progress-bar" style="width:100%"></div>`;
+            data += "</div>";
+            data += "<br />";
+            data += "Time Over !";
+            time.html(data);
+            audio.play();
+            $("#timeOver").hide();
+            $("#cancel").html("Close");
+          } else {
+            data = "<div class='progress'>";
+            data += `<div class="progress-bar" style="width:${
+              (counter / finalTime) * 100
+            }%"></div>`;
+            data += "</div>";
+            data += convert(remainingTime);
+            time.html(data);
+            counter = counter + 1;
+          }
+        }, 1000);
+      }
+    </script>
+
+    <!-- Custom "JQuery Scripts" -->
+    <script>
+      $(document).ready(function () {
+        // search for todos
+        $("#livesearch").on("input", function (e) {
+          $("#todolist").empty();
+          $.ajax({
+            method: "post",
+            url: "/todo/search",
+            data: { text: $("#livesearch").val() },
+            success: function (res) {
+              var data = "";
+              $.each(res, function (index, value) {
+                data += '<div id="todo" class="container text-left">';
+                data += '<div class="container pt-3 pb-1">';
+                data += `<p style="float: left; font-size: 90%;">${value["timestamp"]}</p>`;
+                data += "<br /><br />";
+                if (value["status"] == "done") {
+                  data += '<p style="float: right; color: #74b9ff;">';
+                  data += `(${value["status"]})`;
+                  data += "</p>";
+                } else {
+                  data += '<p style="float: right; color: orange;">';
+                  data += `(${value["status"]})`;
+                  data += "</p>";
+                }
+                data += '<h5 style="font-weight: bold; color: yellow;">';
+                if (value["status"] == "done") {
+                  data += `<strike>${value["topic"]}</strike>`;
+                } else {
+                  data += `${value["topic"]}`;
+                }
+                data += "</h5>";
+                data += "<p>";
+                if (value["status"] == "done") {
+                  data += `<strike>${value["todoString"]}</strike>`;
+                } else {
+                  data += `${value["todoString"]}`;
+                }
+                data += "</p>";
+                data += "</div>";
+                data += '<div id="done" class="text-right">';
+                data += `<a href="/todo/${value["id"]}/changestatus">`;
+                if (value["status"] == "done") {
+                  data += '<i class="fas fa-check-double"></i>';
+                } else {
+                  data +=
+                    '<i style="color: orange;" class="fas fa-check-double"></i>';
+                }
+                data += "</a>";
+                data += "</div>";
+                data += "</div>";
+                data += "<br />";
+              });
+              $("#todolist").html(data);
+            },
+          });
+        });
+      });
+    </script>
+
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+      integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/app.js"></script>
+  </body>
+</html>
